@@ -35,15 +35,6 @@ class Dishes
     private $products;
 
     /**
-     * DishId
-     *
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     */
-    private $dish_id;
-
-    /**
      * Dish name
      *
      * @var string
@@ -111,29 +102,6 @@ class Dishes
                 $product->setDishes(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * Getter for DishId
-     *
-     * @return int|null
-     */
-    public function getDishId(): ?int
-    {
-        return $this->dish_id;
-    }
-
-    /**
-     * Setter for DishId
-     *
-     * @param int $dish_id
-     * @return Dishes
-     */
-    public function setDishId(int $dish_id): self
-    {
-        $this->dish_id = $dish_id;
 
         return $this;
     }

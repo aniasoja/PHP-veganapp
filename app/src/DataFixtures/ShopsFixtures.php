@@ -24,7 +24,6 @@ class ShopsFixtures extends AbstactBaseFixtures
     {
         for ($i = 0; $i < 10; ++$i) {
             $shop = new Shops();
-            $shop->setShopId($this->faker->randomDigitNotNull);
             $shop->setShopName($this->faker->word);
             $this->manager->persist($shop);
         }

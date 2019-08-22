@@ -34,15 +34,6 @@ class Shops
     private $products;
 
     /**
-     * shopId
-     *
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     */
-    private $shop_id;
-
-    /**
      * shopName
      *
      * @var string
@@ -106,29 +97,6 @@ class Shops
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
         }
-
-        return $this;
-    }
-
-    /**
-     * Getter for ShopId
-     *
-     * @return int|null
-     */
-    public function getShopId(): ?int
-    {
-        return $this->shop_id;
-    }
-
-    /**
-     * Setter for ShopId
-     *
-     * @param int $shop_id
-     * @return Shops
-     */
-    public function setShopId(int $shop_id): self
-    {
-        $this->shop_id = $shop_id;
 
         return $this;
     }

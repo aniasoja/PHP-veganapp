@@ -35,14 +35,6 @@ class Categories
      */
     private $products;
 
-    /**
-     * Category Id
-     *
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     */
-    private $category_id;
 
     /**
      * Category name
@@ -121,28 +113,6 @@ class Categories
                 $product->setCategories(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * Getter for CategoryId
-     * @return int|null
-     */
-    public function getCategoryId(): ?int
-    {
-        return $this->category_id;
-    }
-
-    /**
-     * Setter for CategoryId
-     *
-     * @param int $category_id
-     * @return Categories
-     */
-    public function setCategoryId(int $category_id): self
-    {
-        $this->category_id = $category_id;
 
         return $this;
     }

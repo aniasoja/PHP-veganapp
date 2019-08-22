@@ -26,14 +26,6 @@ class Products
      */
     private $id;
 
-    /**
-     * Product Id
-     *
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     */
-    private $product_id;
 
     /**
      * Product name
@@ -115,28 +107,6 @@ class Products
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * Getter for ProductId
-     * @return int|null
-     */
-    public function getProductId(): ?int
-    {
-        return $this->product_id;
-    }
-
-    /**
-     * Setter for ProductId
-     *
-     * @param int $product_id
-     * @return Products
-     */
-    public function setProductId(int $product_id): self
-    {
-        $this->product_id = $product_id;
-
-        return $this;
     }
 
     /**

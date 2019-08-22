@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    View item
+{% endblock %}
+
+{% block body %}
+    <h1>View item</h1>
+    {% if item is defined and item|length %}
+        <dl>
+            <dt>Id</dt>
+            <dd>{{ item.id }}</dd>
+            <dt>Name</dt>
+            <dd>{{ item.name }}</dd>
+            <dt>Is it vegan?</dt>
+            <dd>{{ item.isVegan ? 'Yes':'No' }}</dd>
+            <dt>Does it contain palm oil?</dt>
+            <dd>{{ item.isPalmOil ? 'Yes':'No' }}</dd>
+            <dt>Photo</dt>
+            <dd><img src="{{ asset('public/images/{{ item.photo}}') }}" class="img-rounded"/></dd>
+            <dt>Shops</dt>
+            <dd>{{ item.shops|join(', ') }}</dd>
+            <dt>Dishes</dt>
+            <dd>{{ item.dishes }}</dd>
+            <dt>Category</dt>
+            <dd>{{ item.categories }}</dd>
+        </dl>
+    {% else %}
+        <p>
+            Item not found.
+        </p>
+    {% endif %}
+{% endblock %}

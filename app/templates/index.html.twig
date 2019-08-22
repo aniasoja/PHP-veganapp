@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Homepage | Vegan app
+{% endblock %}
+{% block body %}
+    <h1>Vegan products</h1>
+    {% if data is defined and data|length %}
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Is Vegan?</th>
+                <th>Does it contain palm oil?</th>
+                <th>Shops</th>
+                <th>Dish</th>
+                <th>Category</th>
+                <th scope="col">
+                    Actions
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data %}
+                <tr>
+                    <td>{{ item.getId }}</td>
+                    <td>{{ item.getName }}</td>
+                    <td>{{ item.getIsVegan ? 'Yes':'No' }}</td>
+                    <td>{{ item.getIsPalmOil ? 'Yes':'No' }}</td>
+                    <td>{{ item.getShops|join(', ') }}</td>
+                    <td>{{ item.getDishes }}</td>
+                    <td>{{ item.getCategories|join(', ')  }}</td>
+{#                    <td><a href="{{ path(item.getId) }}">See more</a></td>#}
+                    <td><a href="{{ url("products", {"id" : item.getId}) }}">See more</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <p>
+            Empty list.
+        </p>
+    {% endif %}
+
+{% endblock  %}

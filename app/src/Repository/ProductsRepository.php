@@ -19,6 +19,18 @@ class ProductsRepository extends ServiceEntityRepository
         parent::__construct($registry, Products::class);
     }
 
+    /**
+     * Find all reviewed products.
+     *
+     * @return array
+     */
+    public function FindAllReviewed():array
+    {
+        return $this->findBy(
+            ['is_reviewed'=> 1]
+        )
+            ;
+    }
     // /**
     //  * @return Products[] Returns an array of Products objects
     //  */

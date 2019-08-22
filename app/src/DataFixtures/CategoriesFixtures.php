@@ -23,7 +23,6 @@ class CategoriesFixtures extends AbstactBaseFixtures
     {
         for ($i = 0; $i < 10; ++$i) {
             $category = new Categories();
-            $category->setCategoryId($this->faker->randomDigitNotNull);
             $category->setCategoryName($this->faker->word);
             $category->setBiggerCategoryName($this->faker->word);
             $this->manager->persist($category);

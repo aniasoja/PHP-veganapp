@@ -23,7 +23,6 @@ class DishesFixtures extends AbstactBaseFixtures
     {
         for ($i = 0; $i < 10; ++$i) {
             $dish = new Dishes();
-            $dish->setDishId($this->faker->randomDigitNotNull);
             $dish->setDishName($this->faker->word);
             $this->manager->persist($dish);
         }
