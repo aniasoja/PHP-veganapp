@@ -10,10 +10,50 @@
         <table class="table table-striped">
             <thead>
             <tr>
+                {#
+                {{ form_start(form, { method: 'get', action: url('sort') }) }}
+                {{ form_widget(form) }}
+                #}
+
+                <th></th>
+                <th><input type="text" name="product"></th>
+                <th><input type="checkbox" name="isVegan"></th>
+                <th><input type="checkbox" name="isPalmOilFree"></th>
+                <th>
+                    <input type="checkbox" name="shop" value="Tesco">Tesco
+                    <input type="checkbox" name="shop" value="Biedronka">Biedronka
+                    <input type="checkbox" name="shop" value="Lidl">Lidl
+                    <input type="checkbox" name="shop" value="Kaufland">Kaufland
+                    <input type="checkbox" name="shop" value="Carrefour">Carrefour
+                    <input type="checkbox" name="shop" value="Żabka">Żabka
+                </th>
+                <th>
+                    <select name="dish">
+                        <option value="breakfast">Breakfast</option>
+                        <option value="soup">Soup</option>
+                        <option value="main_dish">Main dish</option>
+                        <option value="snack">Snack</option>
+                        <option value="takeaway">Takeaway / ready-made meal</option>
+                    </select>
+                </th>
+                <th>
+                    <select name="category">
+                        <option value="cat1">Cat1</option>
+                        <option value="cat2">Cat2</option>
+                        <option value="cat3">Cat3</option>
+                    </select>
+                </th>
+                <th><input type="submit" value="{{ 'action.save' }}" class="btn btn-primary" /></th>
+                {#
+                {{ form_end(form) }}
+                #}
+
+            </tr>
+            <tr>
                 <th>Id</th>
                 <th>Name</th>
                 <th>Is Vegan?</th>
-                <th>Does it contain palm oil?</th>
+                <th>Is palm oil free??</th>
                 <th>Shops</th>
                 <th>Dish</th>
                 <th>Category</th>
@@ -29,11 +69,16 @@
                     <td>{{ item.getName }}</td>
                     <td>{{ item.getIsVegan ? 'Yes':'No' }}</td>
                     <td>{{ item.getIsPalmOil ? 'Yes':'No' }}</td>
-                    <td>{{ item.getShops|join(', ') }}</td>
-                    <td>{{ item.getDishes }}</td>
-                    <td>{{ item.getCategories|join(', ')  }}</td>
-{#                    <td><a href="{{ path(item.getId) }}">See more</a></td>#}
-                    <td><a href="{{ url("products", {"id" : item.getId}) }}">See more</a></td>
+                    <td>
+                        <ul>
+                            {% for shop in item.shops %}
+                                <li>{{shop.getShopName}}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{ item.dishes.getDishName }}</td>
+                    <td>{{ item.categories.getCategoryName}}</td>
+                    <td><a href="{{ url("product", {"id" : item.getId}) }}">See more</a></td>
                 </tr>
             {% endfor %}
             </tbody>

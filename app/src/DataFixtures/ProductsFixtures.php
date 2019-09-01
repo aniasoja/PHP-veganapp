@@ -3,6 +3,7 @@
 /**
  * Products fixtures
  */
+
 namespace App\DataFixtures;
 
 use App\Entity\Categories;
@@ -15,7 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  * Class ProductsFixtures
  * @package App\DataFixtures
  */
-class ProductsFixtures extends AbstactBaseFixtures implements DependentFixtureInterface
+class ProductsFixtures extends AbstractBaseFixtures
 {
     /**
      * Load.
@@ -24,34 +25,27 @@ class ProductsFixtures extends AbstactBaseFixtures implements DependentFixtureIn
      */
     public function loadData(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 10; ++$i) {
+        $this->createMany(50, 'products', function ($i) {
             $product = new Products();
             $product->setName($this->faker->word);
             $product->setIsVegan($this->faker->boolean);
             $product->setIsPalmOil($this->faker->boolean);
-            $product->setPhoto($this->faker->imageUrl($width, $height, 'food'));
+            $product->setPhoto($this->faker->imageUrl(500, 500, 'food'));
             $product->setIsReviewed($this->faker->boolean);
-            $this->manager->persist($product);
-        }
+            return $product;
+        });
 
         $manager->flush();
     }
+
     /**
      * This method must return an array of fixtures classes
      * on which the implementing class depends on.
      *
      * @return array Array of dependencies
      */
-    public function getDependenciesShops(): array
+    public function getDependencies(): array
     {
-        return [ShopsFixtures::class];
-    }
-    public function getDependenciesDishes(): array
-    {
-        return [DishesFixtures::class];
-    }
-    public function getDependenciesCategories(): array
-    {
-        return [CategoriesFixtures::class];
+        return [ShopsFixtures::class, DishesFixtures::class, CategoriesFixtures::class];
     }
 }

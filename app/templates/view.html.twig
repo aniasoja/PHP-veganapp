@@ -19,11 +19,14 @@
             <dt>Photo</dt>
             <dd><img src="{{ asset('public/images/{{ item.photo}}') }}" class="img-rounded"/></dd>
             <dt>Shops</dt>
-            <dd>{{ item.shops|join(', ') }}</dd>
+            <dd>{% for shop in item.shops %}
+                    <li>{{shop.getShopName}}</li>
+                {% endfor %}
+            </dd>
             <dt>Dishes</dt>
-            <dd>{{ item.dishes }}</dd>
+            <dd>{{ item.dishes.DishName }}</dd>
             <dt>Category</dt>
-            <dd>{{ item.categories }}</dd>
+            <dd>{{ item.categories.CategoryName }}</dd>
         </dl>
     {% else %}
         <p>

@@ -7,10 +7,12 @@
 namespace App\Controller;
 
 use App\Entity\Products;
+use App\Form\ProductType;
 use App\Repository\ProductsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class HomepageController.
@@ -20,7 +22,8 @@ class HomepageController extends AbstractController
     /**
      * Index action.
      *
-     * @Route("/")
+     * @Route("/",
+     *     name="homepage")
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      */
@@ -44,8 +47,8 @@ class HomepageController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @Route(
-     *     "/{id}",
-     *     name="products",
+     *     "/product/{id}",
+     *     name="product",
      *     requirements={"id": "[1-9]\d*"},
      * )
      */
@@ -54,6 +57,44 @@ class HomepageController extends AbstractController
         return $this->render(
             'view.html.twig',
             ['item' => $repository->findOneById($id)]
+        );
+    }
+// ...
+
+// ...
+    /**
+     * New action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Repository\ProductsRepository $repository Products repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/new",
+     *     methods={"GET", "POST"},
+     *     name="product_new",
+     * )
+     */
+    public function new_product(Request $request, ProductsRepository $repository): Response
+    {
+        $products = new Products();
+        $form = $this->createForm(ProductType::class, $products);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $products->setIsReviewed(0);
+            $repository->save($products);
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render(
+            'new.html.twig',
+            ['form' => $form->createView()]
         );
     }
 // ...

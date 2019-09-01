@@ -13,7 +13,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  * Class ShopsFixtures
  * @package App\DataFixtures
  */
-class ShopsFixtures extends AbstactBaseFixtures
+class ShopsFixtures extends AbstractBaseFixtures
 {
     /**
      * Load.
@@ -22,11 +22,11 @@ class ShopsFixtures extends AbstactBaseFixtures
      */
     public function loadData(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 10; ++$i) {
-            $shop = new Shops();
+        $this->createMany(10, 'shops', function ($i) {
+            $shop = new Shops;
             $shop->setShopName($this->faker->word);
-            $this->manager->persist($shop);
-        }
+            return $shop;
+        });
 
         $manager->flush();
     }

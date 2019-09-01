@@ -12,7 +12,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  * Class CategoriesFixtures
  * @package App\DataFixtures
  */
-class CategoriesFixtures extends AbstactBaseFixtures
+class CategoriesFixtures extends AbstractBaseFixtures
 {
     /**
      * Load.
@@ -21,12 +21,12 @@ class CategoriesFixtures extends AbstactBaseFixtures
      */
     public function loadData(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 10; ++$i) {
+        $this->createMany(10, 'categories', function ($i) {
             $category = new Categories();
             $category->setCategoryName($this->faker->word);
             $category->setBiggerCategoryName($this->faker->word);
-            $this->manager->persist($category);
-        }
+            return $category;
+        });
 
         $manager->flush();
     }

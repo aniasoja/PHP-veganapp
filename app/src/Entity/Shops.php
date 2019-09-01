@@ -111,6 +111,16 @@ class Shops
         return $this->shop_name;
     }
 
+//    public function getShopNames(): string
+//    {
+//
+//        foreach ($this->shops as &$value) {
+//            $value = $value * 2;
+//        }
+//
+//        return $this->shop_name;
+//    }
+
     /**
      * Setter for shopName
      *

@@ -46,7 +46,7 @@ class Products
     private $is_vegan;
 
     /**
-     * Does it contain palm oil?
+     * Is it palm oil free?
      *
      * @var boolean
      *
@@ -66,7 +66,7 @@ class Products
      *
      * @var boolean
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : 0})
      */
     private $is_reviewed;
 
@@ -250,6 +250,22 @@ class Products
     }
 
     /**
+     * Set shops
+     *
+     * @param Shops $shop
+     * @return Products
+     */
+    public function setShop(Shops $shop): self
+    {
+        if (!$this->shops->contains($shop)) {
+            $this->shops[] = $shop;
+            $shop->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    /**
      * Removing shops
      *
      * @param Shops $shop
@@ -307,6 +323,18 @@ class Products
     public function setCategories(?Categories $categories): self
     {
         $this->categories = $categories;
+
+        return $this;
+    }
+
+    public function getSprawdzam(): ?Sprawdzam
+    {
+        return $this->sprawdzam;
+    }
+
+    public function setSprawdzam(?Sprawdzam $sprawdzam): self
+    {
+        $this->sprawdzam = $sprawdzam;
 
         return $this;
     }

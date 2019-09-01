@@ -7,12 +7,13 @@ namespace App\DataFixtures;
 
 use App\Entity\Dishes;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Class DishesFixtures
  * @package App\DataFixtures
  */
-class DishesFixtures extends AbstactBaseFixtures
+class DishesFixtures extends AbstractBaseFixtures
 {
     /**
      * Load.
@@ -21,11 +22,11 @@ class DishesFixtures extends AbstactBaseFixtures
      */
     public function loadData(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 10; ++$i) {
+        $this->createMany(10, 'dishes', function ($i) {
             $dish = new Dishes();
             $dish->setDishName($this->faker->word);
-            $this->manager->persist($dish);
-        }
+            return $dish;
+        });
 
         $manager->flush();
     }

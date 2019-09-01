@@ -31,6 +31,22 @@ class ProductsRepository extends ServiceEntityRepository
         )
             ;
     }
+
+
+    /**
+     * Save record.
+     *
+     * @param \App\Entity\Products $products Products entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Products $products): void
+    {
+        $this->_em->persist($products);
+        $this->_em->flush($products);
+    }
+// ...
     // /**
     //  * @return Products[] Returns an array of Products objects
     //  */
