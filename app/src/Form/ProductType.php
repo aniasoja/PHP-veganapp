@@ -6,22 +6,14 @@
 namespace App\Form;
 
 use App\Entity\Products;
-use App\Entity\Shops;
-use Doctrine\DBAL\Types\BooleanType;
+use Form\ShopType;
 use function Sodium\add;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bridge\Doctrine\Form\Type\CollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
-class ProductModel
-{
-    public $name;
-    public $shops;
-}
 
 
 /**
@@ -50,15 +42,12 @@ class ProductType extends AbstractType
                 'required' => true,
                 'attr' => ['max_length' => 64],
             ]
-        )
-        ->add('shops',
-            EntityType::class, [
-                'class'        => 'App:Shops',
-                'choice_label' => 'shop_name',
-                'label'        => 'Shops',
-                'expanded'     => true,
-                'multiple'     => true,
-                ]);
+        );
+        $builder->add('shops', CollectionType::class, [
+            'entry_type' => ShopType::class,
+            'entry_options' => ['label' => false],
+            'by_reference' => false,
+        ]);
     }
 
     /**

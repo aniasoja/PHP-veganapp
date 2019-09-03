@@ -7,6 +7,7 @@
 namespace App\Controller;
 
 use App\Entity\Products;
+use App\Entity\Shops;
 use App\Form\ProductType;
 use App\Repository\ProductsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

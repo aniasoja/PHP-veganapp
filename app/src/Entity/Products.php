@@ -241,12 +241,13 @@ class Products
      */
     public function addShop(Shops $shop): self
     {
-        if (!$this->shops->contains($shop)) {
+        $this->shops->add($shop);
+        /*if (!$this->shops->contains($shop)) {
             $this->shops[] = $shop;
             $shop->addProduct($this);
         }
 
-        return $this;
+        return $this;*/
     }
 
     /**
