@@ -19,6 +19,20 @@ class ShopsRepository extends ServiceEntityRepository
         parent::__construct($registry, Shops::class);
     }
 
+    /**
+     * Save record.
+     *
+     * @param \App\Entity\Shops $shops Shops entity
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Shops $shops): void
+    {
+        $this->_em->persist($shops);
+        $this->_em->flush($shops);
+    }
+
     // /**
     //  * @return Shops[] Returns an array of Shops objects
     //  */

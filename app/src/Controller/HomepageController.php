@@ -98,5 +98,45 @@ class HomepageController extends AbstractController
             ['form' => $form->createView()]
         );
     }
-// ...
+    /**
+     * Edit action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request    HTTP request
+     * @param \App\Entity\Products                      $category   Category entity
+     * @param \App\Repository\ProductsRepository        $repository Category repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/edit/{id}",
+     *     methods={"GET", "PUT"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="edit",
+     * )
+     */
+    /*public function edit(Request $request, Products $products, ProductsRepository $repository): Response
+    {
+        $form = $this->createForm(ProductType::class, $products, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $repository->save($products);
+
+            $this->addFlash('success', 'message.updated_successfully');
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render(
+            'edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'products' => $products,
+            ]
+        );
+    }
+    */
 }
