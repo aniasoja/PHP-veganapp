@@ -29,7 +29,7 @@ class Shops
     /**
      * products relation
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Products", inversedBy="shops")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Products", mappedBy="shops")
      */
     private $products;
 

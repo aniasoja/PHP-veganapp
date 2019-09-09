@@ -73,7 +73,8 @@ class Products
     /**
      * Shops relation
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Shops", mappedBy="products")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Shops", inversedBy="products")
+     * @ORM\JoinTable(name="shops_products")
      */
     private $shops;
 
@@ -234,7 +235,7 @@ class Products
     }
 
     /**
-     * Adding shops
+     * Adding shop
      *
      * @param Shops $shop
      * @return Products
@@ -245,9 +246,9 @@ class Products
         /*if (!$this->shops->contains($shop)) {
             $this->shops[] = $shop;
             $shop->addProduct($this);
-        }
+        }*/
 
-        return $this;*/
+        return $this;
     }
 
     /**
@@ -328,15 +329,4 @@ class Products
         return $this;
     }
 
-    public function getSprawdzam(): ?Sprawdzam
-    {
-        return $this->sprawdzam;
-    }
-
-    public function setSprawdzam(?Sprawdzam $sprawdzam): self
-    {
-        $this->sprawdzam = $sprawdzam;
-
-        return $this;
-    }
 }

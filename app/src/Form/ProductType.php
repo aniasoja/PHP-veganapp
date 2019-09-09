@@ -6,11 +6,10 @@
 namespace App\Form;
 
 use App\Entity\Products;
-use App\Entity\Shops;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -53,16 +52,20 @@ class ProductType extends AbstractType
                 'required' => false
             ]
         );
-
-      $builder->add(
-          'shops',
-          EntityType::class, [
-              'class' => 'App:Shops',
-              'choice_label' => 'shopName',
-              'multiple' => 'true',
-              'expanded' => 'true'
-          ]
-      );
+        $builder->add(
+            'photo',
+            FileType::class
+        );
+        $builder->add(
+            'shops',
+            EntityType::class,
+            [
+                'class' => 'App:Shops',
+                'choice_label' => 'shopName',
+                'multiple' => true,
+                'expanded' => true
+            ]
+        );
         $builder->add(
             'dishes',
             EntityType::class, [
